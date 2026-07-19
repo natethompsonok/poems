@@ -8,7 +8,8 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     isMobile = true;
 }
 
-export default class InfiniteMenu {
+// CHANGED: Removed "export default" from here
+class InfiniteMenu {
     constructor(el) {
         if ( !isMobile ) {
             this.DOM = {el: el};
@@ -32,18 +33,11 @@ export default class InfiniteMenu {
     setScrollPos(pos) {
         this.DOM.el.scrollTop = pos;
     }
-    // Create menu items clones and append them to the menu items list
-    // total clones = number of menu items that fit in the viewport
     cloneItems() {
-        // Get the height of one menu item
         const itemHeight = this.DOM.menuItems[0].offsetHeight;
-        // How many items fit in the window?
         const fitIn = Math.ceil(winsize.height / itemHeight);
-        // Create [fitIn] clones from the beginning of the list
         
-        // Remove any
         this.DOM.el.querySelectorAll('.loop__clone').forEach(clone => this.DOM.el.removeChild(clone));
-        // Add clones
         let totalClones = 0;
         this.DOM.menuItems.filter((_, index) => (index < fitIn)).map(target => {
             const clone = target.cloneNode(true);
@@ -52,9 +46,7 @@ export default class InfiniteMenu {
             ++totalClones;
         });
 
-        // All clones height
         this.clonesHeight = totalClones * itemHeight;
-        // Scrollable area height
         this.scrollHeight = this.DOM.el.scrollHeight;
     }
     initEvents() {
@@ -65,7 +57,6 @@ export default class InfiniteMenu {
         this.initScroll();
     }
     initScroll() {
-        // Scroll 1 pixel to allow upwards scrolling
         this.scrollPos = this.getScrollPos();
         if (this.scrollPos <= 0) {
             this.setScrollPos(1);
@@ -75,12 +66,11 @@ export default class InfiniteMenu {
         this.scrollPos = this.getScrollPos();
 
         if ( this.clonesHeight + this.scrollPos >= this.scrollHeight ) {
-            // Scroll to the top when you’ve reached the bottom
-            this.setScrollPos(1); // Scroll down 1 pixel to allow upwards scrolling
+            this.setScrollPos(1); 
         } 
         else if ( this.scrollPos <= 0 ) {
-            // Scroll to the bottom when you reach the top
-            this.setScrollPos(this.scrollHeight - this.clonesHeight);
+            // FIX: Subtracting 1 pixel keeps the calculation stable when bouncing back down
+            this.setScrollPos(this.scrollHeight - this.clonesHeight - 1);
         }
     }
     render() {
