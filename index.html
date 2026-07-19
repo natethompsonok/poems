@@ -6,55 +6,6 @@
     <title>Nate Thompson | Executive Creative Director</title>
     
 <style>
-html,
-body {
-  height: 100%;
-  overflow: hidden;
-  margin: 0;
-}
-
-.Loop {
-  position: relative;
-  height: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-section {
-  position: relative;
-  text-align: center;
-  min-height: 300px;
-  max-height: 700px;
-  height: 80%;
-}
-
-/* Demo styles */
-body {
-  font-family: "Avenir Next", Helvetica, sans-serif;
-  font-weight: normal;
-  font-size: 100%;
-}
-
-.red { background: #FF4136; }
-.green { background: #2ECC40; }
-.blue { background: #0074D9; }
-.orange { background: rebeccapurple; }
-
-h1 {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  font-size: 80px;
-  letter-spacing: 5px;
-  color: #fff;
-  text-transform: uppercase;
-}
-
-
-
-
 
     
 
@@ -242,95 +193,6 @@ a:focus {
 
 
 
-    
-</style>
-
-<script type="text/javascript">
-// Declare variables globally so all functions can access them
-var doc = window.document,
-  context,
-  items,
-  clones = [],
-  disableScroll = false,
-  scrollHeight = 0,
-  scrollPos = 0,
-  clonesHeight = 0
-
-function getScrollPos () {
-  return (context.pageYOffset || context.scrollTop) - (context.clientTop || 0)
-}
-
-function setScrollPos (pos) {
-  context.scrollTop = pos
-}
-
-function getClonesHeight () {
-  clonesHeight = 0
-  Array.from(clones, clone => {
-    clonesHeight = clonesHeight + clone.offsetHeight
-  })
-  return clonesHeight
-}
-
-function reCalc () {
-  scrollPos = getScrollPos()
-  scrollHeight = context.scrollHeight
-  clonesHeight = getClonesHeight()
-
-  if (scrollPos <= 0) {
-    setScrollPos(1) 
-  }
-}
-
-function scrollUpdate () {
-  if (!disableScroll) {
-    scrollPos = getScrollPos()
-
-    // Fixed math condition: check if we've scrolled past the original elements
-    if (clonesHeight + scrollPos >= scrollHeight) {
-      setScrollPos(1) 
-      disableScroll = true
-    } else if (scrollPos <= 0) {
-      // Jump down to the matching position in the clones
-      setScrollPos(scrollHeight - clonesHeight - 1)
-      disableScroll = true
-    }
-  }
-
-  if (disableScroll) {
-    window.setTimeout(function () {
-      disableScroll = false
-    }, 40)
-  }
-}
-
-function onLoad () {
-  // FIX: Fetch elements now that the DOM is fully ready
-  context = doc.querySelector('.js-loopContainer')
-  items = doc.querySelectorAll('.js-loopItem')
-
-  // Clone items and append them to create the seamless loop
-  Array.from(items, item => {
-    const clone = item.cloneNode(true)
-    context.appendChild(clone)
-    clone.classList.add('js-clone')
-  })
-
-  clones = context.querySelectorAll('.js-clone')
-
-  reCalc()
-
-  context.addEventListener('scroll', function () {
-    window.requestAnimationFrame(scrollUpdate)
-  }, false)
-
-  window.addEventListener('resize', function () {
-    window.requestAnimationFrame(reCalc)
-  }, false)
-}
-
-window.onload = onLoad
-</script>
 
 </head>
 <body>
@@ -355,28 +217,6 @@ window.onload = onLoad
     <script src="js/index.js"></script>
 
 
-  <!--  
-<main class="Loop js-loopContainer">
-  <section class="js-loopItem green">
-    <h1>One</h1>
-  </section>
-  <section class="js-loopItem red">
-    <h1>For</h1>
-  </section>
-  <section class="js-loopItem blue">
-    <h1>All</h1>
-  </section>
-  <section class="js-loopItem orange">
-    <h1>And</h1>
-  </section>
-  <section class="js-loopItem blue">
-    <h1>All</h1>
-  </section>
-  <section class="js-loopItem red">
-    <h1>For</h1>
-  </section>
-</main>
-    -->
 
 </body>
 </html>
