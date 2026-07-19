@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scroll Loop Menu | Codrops</title>
+    <meta name="description" content="A full page menu with a scroll loop animation." />
+    <meta name="keywords" content="scroll, loop, menu, website, javascript, web design" />
+    <meta name="author" content="Codrops" />
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <script>
+    document.documentElement.className = "js";
+    var supportsCssVars = function() { var e, t = document.createElement("style"); return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e };
+    supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");
+    </script>
+</head>
+<body>
+
+
+  <div class="frame">
+		<h1 class="frame__title"><a href="index.html">Cathy Briel</a></h1>
+		<div class="frame__links">
+			<a class="frame__link">Biography</a>
+			<a href="#" class="frame__link">Purchase Book</a>
+		</div>
+        <span class="frame__button" aria-hidden="true">Close</span>
+	</div>
+    
+
+    <nav class="menu">
+        <div class="menu__item">Blue Shoe</div>
+    </nav>
+
+    
+<!-- Load the menu logic first -->
+<script src="js/infinitemenu.js"></script>
+
+<!-- Then load your main script -->
+<script src="js/index.js"></script>
+    
+</body>
+</html>
